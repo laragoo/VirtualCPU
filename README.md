@@ -3,6 +3,9 @@ Virtual psuedo-pipeline CPU created in logisim
 
 Created for a group project in COMP 273: Intro to Computer Systems (Fall 2014) at McGill University
 
+Intended to be used in [Logisim](http://www.cburch.com/logisim/).
+Instructions (such as those found at the bottom of this document) are to be input manually on the input buffer (keypad).
+
 
 ![Overview shot](/overview.png?raw=true "Overview")
 
