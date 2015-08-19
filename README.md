@@ -14,7 +14,7 @@ Instructions are stored in the instruction cache, which then enter the instructi
 ### *Logisim Files*
 
 #### Input Buffer/Keypad
-	Keypad consists of 11 input pins, 10 of which represent an integer value from 0 to 9 which are decoded into their binary representations and an enter key to load into input buffer. The sum of all of the keypad digits clicked is sent to the input buffer on enter press. 
+Keypad consists of 11 input pins, 10 of which represent an integer value from 0 to 9 which are decoded into their binary representations and an enter key to load into input buffer. The sum of all of the keypad digits clicked is sent to the input buffer on enter press. 
 
 #### Instruction Register
 	Contains 8 D flip-flops, one to store and output each bit of the instruction address such that the value of the bit can only change on a rising clock edge; otherwise, the flip-flop holds the current value of its respective bit. Outputs the instruction byte delivering the appropriate bits to the CU and the register block.
