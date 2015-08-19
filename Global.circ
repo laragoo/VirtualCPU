@@ -61,7 +61,6 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
   <lib desc="file#CU.circ" name="10"/>
   <lib desc="file#IR.circ" name="11"/>
   <lib desc="file#2 HEX-Display.circ" name="12"/>
-  <lib desc="file#CU_Theo.circ" name="13"/>
   <main name="main"/>
   <options>
     <a name="gateUndefined" val="ignore"/>
@@ -567,7 +566,7 @@ This file is intended to be loaded by Logisim (http://www.cburch.com/logisim/).
     <wire from="(100,460)" to="(120,460)"/>
     <wire from="(200,160)" to="(210,160)"/>
     <comp lib="1" loc="(430,110)" name="AND Gate"/>
-    <comp lib="13" loc="(790,210)" name="main"/>
+    <comp lib="10" loc="(790,210)" name="main"/>
     <comp lib="0" loc="(1030,230)" name="Splitter">
       <a name="fanout" val="8"/>
       <a name="incoming" val="8"/>
