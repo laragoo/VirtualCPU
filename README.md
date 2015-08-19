@@ -13,34 +13,34 @@ Instructions are stored in the instruction cache, which then enter the instructi
 
 ### *Logisim Files*
 
-#### Input Buffer/Keypad
-Keypad consists of 11 input pins, 10 of which represent an integer value from 0 to 9 which are decoded into their binary representations and an enter key to load into input buffer. The sum of all of the keypad digits clicked is sent to the input buffer on enter press. 
+#### *Input Buffer/Keypad*
+	Keypad consists of 11 input pins, 10 of which represent an integer value from 0 to 9 which are decoded into their binary representations and an enter key to load into input buffer. The sum of all of the keypad digits clicked is sent to the input buffer on enter press. 
 
-#### Instruction Register
+#### *Instruction Register*
 	Contains 8 D flip-flops, one to store and output each bit of the instruction address such that the value of the bit can only change on a rising clock edge; otherwise, the flip-flop holds the current value of its respective bit. Outputs the instruction byte delivering the appropriate bits to the CU and the register block.
 
-#### Program Counter
+#### *Program Counter*
 	Contains 8 D flip-flops that update upon clock input by taking a byte from the input pins. The byte stored in the PC is then sent to an address that adds 1 to the PC register which is fed into a multiplexer along with the branch target address which selects the branch address if the input from the CU is 0 and the regular PC+1 address if the input from the CU is 1.
 
-#### Control Unit
+#### *Control Unit*
 	The Control Unit takes in the instruction from the IR at address PC and handles the instruction byte by dividing it into its constituent bits. Each set of bits that together form the opcode, function code (only lower 3 bits; left-most bit is extraneous), and operand registers is decoded into output bits that activate the instruction specified components to perform their functions based on the input bits of the instruction byte. 	
 
-#### Register Block
+#### *Register Block*
 	Has as input 2 register selector bits, a write destination bit, data input, a mode input, and a clock input. Takes in a mode bit that determines whether it will read or write to the register(s) provided. If the register block is set to read, output will be fed into the ALU. If set to write, will store the data input into the destination register.
 
-#### ALU Control Block
+#### *ALU Control Block*
 	Takes as input the ALU Op-code output from the CU, designating whether ALU control should be generated from the function field (10), whether ALU should test for equality (01), or nothing happens (00,11), and the three right-most bits of the function code in the instruction. Each input section enters a series of AND gates to determine the add/sub and mult bits, which are input into the ALU to determine its operation.
 
-#### 8-bit ALU
+#### *8-bit ALU*
 	Takes in as input two 8-bit registers as data, an input bit from the CU which determines whether the operation will be addition or subtraction, and another input bit which determines whether the operation performed will be multiplication. Multiplication bit trumps the add/sub bit such that when a 1 is fed into the multiplication input bit, the ALU performs a multiplication regardless of the add/sub bit. Subtraction is performed by taking the two’s complement of the B input (which we get using a multiplexer which selects between the original B input and the NOT B input, and passing a 1 to the carry-in at bit 0), and adding. An XOR gate is connected to the last add/sub ALU bit which outputs the overflow only when: 1) overflow exists, 2) operation performed was an addition. Output register is fed into an OR gate which outputs a 1 in the zero output bit only when all the bits in the output are 0.
 
-#### Multiplier
+#### *Multiplier*
 The 8 bit multiplier is built up from 2 bit multipliers arranged to make 4 bit multipliers which are in turn arranged in our ALU to make the 8 bit multiplier. The method by which the multipliers are arranged is as follows: Since the multiplication of two 4 bit binary numbers, 1111 and 1111 can be expressed as (1100 +0011) x (1100+0011)  which we can expand to (1100x1100)+(1100x0011)+(0011x1100)+(0011x0011) is essentially the addition (along with some shifting of bits) of 2 bit muliplications. Since we have a 2 bit multiplier we can therefore create a 4 bit multiplier following the logic above. We can repeat the process with 4 bit multipliers as our base to create our 8 bit multiplier.
 
-#### RAM
+#### *RAM*
 The 8-byte RAM has a single-bit mode input; when mode is set to 0, RAM reads/outputs data; when 1, RAM writes/accepts data into its registers. There is also a clock input put to synchronize the reading/writing of registers in RAM. 4 address input bits are fed into AND gates feeding into the open-control of each 8-bit register to allow, or not, the reading/writing of a particular register; each bit of the 8-bit input is input directly into the register, and can only be input given the open and mode bits are set to 1 for the given register. If write mode is set, the output bits through each register go through a set of OR gates to feed output data from the RAM. This is implemented for both the Instruction and the Data caches. 
 	
-#### 2-Hex Display
+#### *2-Hex Display*
  Takes as input 8 wires, splits into 16 bits for each display digit. Each 7-segment display is capable of displaying hexadecimal digits 0-F. Each bit goes through a logic array of AND and NOT gates to create the necessary digit; those outputs are then passed through respective OR gates to light up the appropriate segments of display for the particular digit.
 
 
